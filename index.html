@@ -81,7 +81,7 @@
     .live-stream-container {
       position: relative;
       width: 100%;
-      padding-bottom: 45%; /* 16:9 aspect ratio */
+      padding-bottom: 45%;
       height: 0;
       overflow: hidden;
       border-radius: 1.2rem;
@@ -97,6 +97,67 @@
       height: 100%;
       border: 0;
       background: #111;
+    }
+
+    /* pesan error / fallback untuk mixed content */
+    .mixed-content-fallback {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #1a2a3a, #0d1b2a);
+      color: #aac4e0;
+      text-align: center;
+      padding: 2rem;
+      border-radius: 1.2rem;
+    }
+
+    .mixed-content-fallback i {
+      font-size: 3.5rem;
+      color: #ffd966;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .mixed-content-fallback h3 {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .mixed-content-fallback p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      max-width: 400px;
+      line-height: 1.6;
+    }
+
+    .mixed-content-fallback .btn-stream {
+      margin-top: 1.2rem;
+      background: #ffd966;
+      color: #1a2a3a;
+      padding: 0.6rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mixed-content-fallback .btn-stream:hover {
+      background: #ffe08a;
+      transform: scale(1.03);
     }
 
     /* header / cover */
@@ -416,25 +477,8 @@
         padding: 1.5rem;
       }
       .live-stream-container {
-        padding-bottom: 56.25%; /* lebih tinggi di mobile */
+        padding-bottom: 56.25%;
       }
-    }
-
-    /* fallback jika iframe tidak bisa dimuat */
-    .live-stream-container .fallback-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #888;
-      font-size: 0.9rem;
-      text-align: center;
-      pointer-events: none;
-      background: rgba(0,0,0,0.5);
-      padding: 0.8rem 1.5rem;
-      border-radius: 30px;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.1);
     }
   </style>
 </head>
@@ -445,18 +489,29 @@
       <div class="live-badge">
         <i class="fas fa-circle"></i> LIVE
       </div>
-      <div class="live-stream-container">
+      <div class="live-stream-container" id="liveContainer">
+        <!-- Fallback untuk mixed content (ditampilkan via JS jika iframe gagal) -->
+        <div class="mixed-content-fallback" id="fallbackContent">
+          <i class="fas fa-video"></i>
+          <h3>Live Streaming Tidak Tersedia</h3>
+          <p>
+            Konten live streaming dari <strong>http://10.101.209.100/</strong> tidak dapat ditampilkan karena 
+            perbedaan protokol keamanan (Mixed Content).
+          </p>
+          <a href="http://10.101.209.100/" target="_blank" class="btn-stream">
+            <i class="fas fa-external-link-alt"></i> Buka di Tab Baru
+          </a>
+        </div>
+        <!-- iframe disembunyikan, akan ditampilkan jika berhasil -->
         <iframe 
+          id="liveIframe"
           src="http://10.101.209.100/" 
           allow="autoplay; fullscreen" 
           allowfullscreen
           loading="lazy"
           title="Live Streaming SMAN 3 Bogor"
+          style="display:none;"
         ></iframe>
-        <div class="fallback-text">
-          <i class="fas fa-video" style="display:block; font-size:1.6rem; margin-bottom:6px;"></i>
-          Memuat live streaming...
-        </div>
       </div>
     </div>
 
@@ -536,7 +591,7 @@
         <div class="exp-box">
           <h4><i class="fas fa-briefcase"></i> Riwayat Jabatan</h4>
           <ul>
-            <li><i class="fas fa-user-tie"></i> Plt. Kepala Sekolah dan Wakil Kepala Sekolah Kesiswaan (2025 – sekarang)</li>
+            <li><i class="fas fa-user-tie"></i> Wakil Kepala Sekolah Kesiswaan (2025 – sekarang)</li>
             <li><i class="fas fa-user-tie"></i> Wakil Kepala Sekolah Kurikulum (2021 – 2025)</li>
             <li><i class="fas fa-flask"></i> Kepala Laboratorium (2017 – 2021)</li>
             <li><i class="fas fa-chalkboard"></i> Guru Ahli Madya / Guru Madya (2002 – sekarang)</li>
@@ -570,5 +625,53 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Deteksi Mixed Content: coba muat iframe, jika gagal tampilkan fallback
+    document.addEventListener('DOMContentLoaded', function() {
+      const iframe = document.getElementById('liveIframe');
+      const fallback = document.getElementById('fallbackContent');
+      const container = document.getElementById('liveContainer');
+
+      // Cek apakah halaman diakses melalui HTTPS
+      if (window.location.protocol === 'https:') {
+        // Jika HTTPS, browser akan memblokir HTTP iframe
+        // Tampilkan fallback, sembunyikan iframe
+        iframe.style.display = 'none';
+        fallback.style.display = 'flex';
+      } else {
+        // Jika HTTP (atau lokal), coba tampilkan iframe
+        iframe.style.display = 'block';
+        fallback.style.display = 'none';
+        // Set src ulang untuk memicu loading
+        iframe.src = 'http://10.101.209.100/';
+      }
+
+      // Event listener untuk error pada iframe (jika gagal dimuat)
+      iframe.addEventListener('error', function() {
+        iframe.style.display = 'none';
+        fallback.style.display = 'flex';
+      });
+
+      // Timeout: jika iframe tidak merespon dalam 8 detik, tampilkan fallback
+      let loadTimeout = setTimeout(function() {
+        if (iframe.style.display !== 'none') {
+          // Cek apakah iframe benar-benar termuat
+          try {
+            // Jika akses ke konten iframe ditolak (cross-origin), berarti termuat
+            // Tapi kita tidak bisa mendeteksi dengan pasti, jadi biarkan saja
+          } catch(e) {
+            // Jika error, mungkin belum termuat
+          }
+          // Tetap tampilkan fallback setelah timeout untuk pengalaman lebih baik
+          // Tapi hanya jika kita di HTTPS
+          if (window.location.protocol === 'https:') {
+            iframe.style.display = 'none';
+            fallback.style.display = 'flex';
+          }
+        }
+      }, 8000);
+    });
+  </script>
 </body>
 </html>
