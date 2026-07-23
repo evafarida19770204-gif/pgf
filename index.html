@@ -1,1 +1,165 @@
-Alhamdulillah, tetap semangat
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perkenalan - Eva Farida</title>
+    <style>
+        /* Gaya Dasar & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Kartu Profil */
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Header / Banner */
+        .card-header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            height: 120px;
+        }
+
+        /* Foto Profil */
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            margin-top: -60px;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        /* Konten */
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-body h1 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .card-body h3 {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .about-text {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Bagian Detail/Keahlian */
+        .details {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .details h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        .details ul {
+            list-style: none;
+        }
+
+        .details ul li {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .details ul li strong {
+            color: #4a5568;
+        }
+
+        /* Tombol Kontak / Sosial Media */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #fff;
+            background: #6e8efb;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #5a7be0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="card-header"></div>
+        
+        <!-- Ganti src dengan link foto Anda jika ada -->
+        <img src="https://via.placeholder.com/120" alt="Foto Eva Farida" class="profile-img">
+        
+        <div class="card-body">
+            <h1>Eva Farida</h1>
+            <h3>Profesional / Pelajar / Pekerja Kreatif</h3>
+
+            <p class="about-text">
+                Halo! Saya <strong>Eva Farida</strong>. Saya seseorang yang antusias dalam belajar hal-hal baru, senang bekerja sama dalam tim, dan selalu berusaha memberikan yang terbaik dalam setiap hal yang saya kerjakan.
+            </p>
+
+            <div class="details">
+                <h4>Informasi Singkat</h4>
+                <ul>
+                    <li><strong>Lokasi:</strong> Indonesia</li>
+                    <li><strong>Minat:</strong> Desain, Menulis, & Teknologi</li>
+                    <li><strong>Email:</strong> evafarida@email.com</li>
+                </ul>
+            </div>
+
+            <div class="social-links">
+                <a href="mailto:evafarida@email.com" class="btn">Hubungi Saya</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
