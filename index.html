@@ -40,7 +40,7 @@
       transform: scale(1.005);
     }
 
-    /* ===== VIDEO STREAMING SIDE BY SIDE ===== */
+    /* ===== VIDEO SECTION SIDE BY SIDE ===== */
     .video-section {
       background: #0b1a2b;
       padding: 1rem 1rem 0.8rem 1rem;
@@ -104,6 +104,17 @@
       display: block;
     }
 
+    /* Canvas untuk FaceMesh overlay */
+    .video-item canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
     .video-item .video-label {
       position: absolute;
       bottom: 0.8rem;
@@ -120,6 +131,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      z-index: 4;
     }
 
     .video-item .video-label i {
@@ -143,6 +155,36 @@
     .status-dot.offline {
       background: #e74c3c;
       box-shadow: 0 0 10px rgba(231, 76, 60, 0.4);
+    }
+
+    /* FaceMesh status di pojok */
+    .facemesh-status {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      color: #4ecdc4;
+      font-size: 0.6rem;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid rgba(78, 205, 196, 0.3);
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .facemesh-status i {
+      font-size: 0.5rem;
+      animation: blink 1.5s infinite;
+    }
+
+    .facemesh-status.inactive {
+      color: #e74c3c;
+      border-color: rgba(231, 76, 60, 0.3);
     }
 
     .video-item .fallback-msg {
@@ -285,7 +327,6 @@
       gap: 1.8rem;
     }
 
-    /* BIO GRID */
     .bio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
@@ -325,7 +366,6 @@
       margin-right: 3px;
     }
 
-    /* DESKRIPSI */
     .description h3 {
       font-size: 1.1rem;
       font-weight: 600;
@@ -351,7 +391,6 @@
       font-size: 0.95rem;
     }
 
-    /* PENDIDIKAN & PENGALAMAN */
     .edu-exp {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -417,7 +456,6 @@
       width: 1rem;
     }
 
-    /* QUOTE */
     .quote-block {
       background: linear-gradient(145deg, #eef5fd, #e3ecf7);
       border-radius: 2rem;
@@ -445,7 +483,6 @@
       color: #1a3a5c;
     }
 
-    /* ===== FOOTER ===== */
     .profile-footer {
       background: #f2f8ff;
       padding: 1rem 2.5rem;
@@ -490,7 +527,6 @@
       color: #2b5b84;
     }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .video-grid {
         grid-template-columns: 1fr;
@@ -535,6 +571,12 @@
       .title-group h1 {
         font-size: 1.6rem;
       }
+      .facemesh-status {
+        font-size: 0.5rem;
+        padding: 0.15rem 0.6rem;
+        top: 0.5rem;
+        right: 0.5rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -557,14 +599,17 @@
       </div>
 
       <div class="video-grid">
-        <!-- Video 1: Kamera Laptop (Webcam) -->
+        <!-- Video 1: Kamera Laptop (Webcam) + FaceMesh -->
         <div class="video-item">
           <video id="webcamVideo" autoplay playsinline muted></video>
+          <canvas id="faceMeshCanvas"></canvas>
           <div class="video-label">
-            <span class="status-dot online"></span>
+            <span class="status-dot online" id="webcamStatusDot"></span>
             <i class="fas fa-camera"></i> Kamera Laptop
           </div>
-          <!-- fallback jika webcam tidak tersedia -->
+          <div class="facemesh-status" id="faceMeshStatus">
+            <i class="fas fa-circle"></i> FaceMesh: <span id="faceMeshCount">0</span> wajah
+          </div>
           <div class="fallback-msg" id="webcamFallback" style="display:none;">
             <i class="fas fa-camera-slash"></i>
             <h4>Kamera Tidak Tersedia</h4>
@@ -586,7 +631,6 @@
             <span class="status-dot online" id="ipStatusDot"></span>
             <i class="fas fa-network-wired"></i> Stream IP
           </div>
-          <!-- fallback untuk mixed content / error -->
           <div class="fallback-msg" id="ipFallback" style="display:none;">
             <i class="fas fa-exclamation-triangle"></i>
             <h4>Stream IP Tidak Tersedia</h4>
@@ -621,7 +665,6 @@
     <!-- ===== BODY PROFIL ===== -->
     <div class="profile-body">
 
-      <!-- BIO GRID -->
       <div class="bio-grid">
         <div class="bio-item">
           <i class="fas fa-id-badge"></i>
@@ -657,7 +700,6 @@
         </div>
       </div>
 
-      <!-- DESKRIPSI -->
       <div class="description">
         <h3><i class="fas fa-pen-fancy"></i> Tentang Saya</h3>
         <p>
@@ -669,7 +711,6 @@
         </p>
       </div>
 
-      <!-- PENDIDIKAN & PENGALAMAN -->
       <div class="edu-exp">
         <div class="edu-box">
           <h4><i class="fas fa-university"></i> Pendidikan Formal</h4>
@@ -692,7 +733,6 @@
         </div>
       </div>
 
-      <!-- QUOTE -->
       <div class="quote-block">
         <i class="fas fa-quote-left"></i> 
         “Fisika bukan sekadar rumus, tetapi cara berpikir untuk memahami alam semesta. 
@@ -721,29 +761,136 @@
 
   </div>
 
+  <!-- ===== MEDIAPIPE FACE MESH ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+
   <script>
     // ===== 1. AKSES WEBCAM =====
     const webcamVideo = document.getElementById('webcamVideo');
     const webcamFallback = document.getElementById('webcamFallback');
+    const webcamStatusDot = document.getElementById('webcamStatusDot');
+    const faceMeshCanvas = document.getElementById('faceMeshCanvas');
+    const faceMeshCount = document.getElementById('faceMeshCount');
+    const faceMeshStatus = document.getElementById('faceMeshStatus');
 
+    let faceMeshInitialized = false;
+
+    // ===== 2. FACE MESH DENGAN MEDIAPIPE =====
+    function initializeFaceMesh() {
+      if (faceMeshInitialized) return;
+
+      const faceMesh = new FaceMesh({
+        locateFile: (file) => {
+          return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
+        }
+      });
+
+      faceMesh.setOptions({
+        maxNumFaces: 4,
+        refineLandmarks: true,
+        minDetectionConfidence: 0.5,
+        minTrackingConfidence: 0.5
+      });
+
+      faceMesh.onResults((results) => {
+        // Update jumlah wajah terdeteksi
+        if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0) {
+          faceMeshCount.textContent = results.multiFaceLandmarks.length;
+          faceMeshStatus.className = 'facemesh-status';
+          webcamStatusDot.className = 'status-dot online';
+        } else {
+          faceMeshCount.textContent = '0';
+          faceMeshStatus.className = 'facemesh-status inactive';
+        }
+
+        // Gambar landmark di canvas
+        const canvas = faceMeshCanvas;
+        const canvasCtx = canvas.getContext('2d');
+        canvas.width = webcamVideo.videoWidth || 640;
+        canvas.height = webcamVideo.videoHeight || 480;
+
+        canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+        if (results.multiFaceLandmarks) {
+          for (const landmarks of results.multiFaceLandmarks) {
+            drawConnectors(canvasCtx, landmarks, FACEMESH_TESSELATION, {
+              color: '#4ecdc4',
+              lineWidth: 0.8,
+              opacity: 0.4
+            });
+            drawConnectors(canvasCtx, landmarks, FACEMESH_CONTOURS, {
+              color: '#ffd966',
+              lineWidth: 1.2,
+              opacity: 0.6
+            });
+            drawLandmarks(canvasCtx, landmarks, {
+              color: '#ff6b6b',
+              lineWidth: 1,
+              radius: 1.5,
+              opacity: 0.7
+            });
+          }
+        }
+      });
+
+      // Inisialisasi kamera untuk FaceMesh
+      const camera = new Camera(webcamVideo, {
+        onFrame: async () => {
+          await faceMesh.send({ image: webcamVideo });
+        },
+        width: 640,
+        height: 480
+      });
+
+      camera.start()
+        .then(() => {
+          faceMeshInitialized = true;
+          console.log('✅ FaceMesh initialized successfully');
+        })
+        .catch((err) => {
+          console.warn('FaceMesh camera error:', err);
+          faceMeshStatus.className = 'facemesh-status inactive';
+          faceMeshStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> FaceMesh: Error';
+        });
+    }
+
+    // ===== 3. WEBCAM + FACE MESH =====
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         .then(function(stream) {
           webcamVideo.srcObject = stream;
           webcamVideo.style.display = 'block';
           webcamFallback.style.display = 'none';
+          webcamStatusDot.className = 'status-dot online';
+
+          // Tunggu video siap lalu inisialisasi FaceMesh
+          webcamVideo.addEventListener('loadeddata', function() {
+            initializeFaceMesh();
+          });
+
+          // Jika video sudah siap
+          if (webcamVideo.readyState >= 2) {
+            initializeFaceMesh();
+          }
         })
         .catch(function(err) {
           console.warn('Webcam error:', err);
           webcamVideo.style.display = 'none';
           webcamFallback.style.display = 'flex';
+          webcamStatusDot.className = 'status-dot offline';
+          faceMeshStatus.className = 'facemesh-status inactive';
+          faceMeshStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Kamera tidak tersedia';
         });
     } else {
       webcamVideo.style.display = 'none';
       webcamFallback.style.display = 'flex';
+      webcamStatusDot.className = 'status-dot offline';
+      faceMeshStatus.className = 'facemesh-status inactive';
+      faceMeshStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Kamera tidak didukung';
     }
 
-    // ===== 2. STREAM IP - Deteksi Mixed Content =====
+    // ===== 4. STREAM IP - Deteksi Mixed Content =====
     const ipIframe = document.getElementById('ipStreamIframe');
     const ipFallback = document.getElementById('ipFallback');
     const ipStatusDot = document.getElementById('ipStatusDot');
@@ -754,24 +901,16 @@
       ipStatusDot.className = 'status-dot offline';
     }
 
-    // Jika halaman diakses via HTTPS, browser akan memblokir HTTP iframe
     if (window.location.protocol === 'https:') {
-      // Tampilkan fallback karena mixed content
       handleIPStreamError();
     } else {
-      // Jika HTTP, coba muat iframe
       ipIframe.style.display = 'block';
       ipFallback.style.display = 'none';
       ipStatusDot.className = 'status-dot online';
-      
-      // Set src ulang untuk memicu loading
       ipIframe.src = 'http://10.101.209.100/';
-      
-      // Timeout: jika iframe tidak merespon dalam 10 detik, anggap gagal
+
       setTimeout(function() {
-        // Cek apakah iframe masih ditampilkan
         if (ipIframe.style.display !== 'none') {
-          // Kita tidak bisa mendeteksi secara pasti, tapi jika masih di HTTPS tampilkan fallback
           if (window.location.protocol === 'https:') {
             handleIPStreamError();
           }
@@ -779,15 +918,14 @@
       }, 10000);
     }
 
-    // Event listener error pada iframe
     ipIframe.addEventListener('error', function() {
       handleIPStreamError();
     });
 
-    // ===== 3. FITUR TAMBAHAN: Tombol kontrol (opsional) =====
     console.log('✅ Profil Eva Farida siap!');
     console.log('📹 Webcam: ' + (webcamVideo.srcObject ? 'Aktif' : 'Tidak tersedia'));
     console.log('📡 Stream IP: ' + (ipIframe.style.display !== 'none' ? 'Dimuat' : 'Fallback'));
+    console.log('🧠 FaceMesh: Menunggu inisialisasi...');
   </script>
 </body>
 </html>
