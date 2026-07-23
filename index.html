@@ -1,235 +1,462 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Guru - Eva Farida, S.Pd., M.Pd.</title>
-    <style>
-        /* Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Eva Farida, S.Pd, M.Pd | Guru Fisika SMAN 3 Bogor</title>
+  <!-- Font Awesome untuk ikon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            background-color: #f0f4f8;
-            color: #2d3748;
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(145deg, #f0f4ff 0%, #e6edf9 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
 
-        /* Container Card */
-        .profile-card {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            max-width: 600px;
-            width: 100%;
-            overflow: hidden;
-        }
+    .card {
+      max-width: 960px;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 2.5rem;
+      box-shadow: 0 30px 50px rgba(0, 20, 40, 0.2);
+      overflow: hidden;
+      transition: transform 0.25s ease;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
 
-        /* Header / Banner Bertema Sains/Fisika */
-        .card-header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            padding: 40px 20px 60px;
-            text-align: center;
-            color: #ffffff;
-            position: relative;
-        }
+    .card:hover {
+      transform: scale(1.01);
+    }
 
-        .card-header h2 {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #cbd5e0;
-            margin-bottom: 5px;
-        }
+    /* header / cover */
+    .profile-header {
+      background: linear-gradient(135deg, #1a3a5c 0%, #2b5b84 100%);
+      padding: 2.5rem 2.5rem 1.8rem 2.5rem;
+      color: white;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.8rem;
+      position: relative;
+    }
 
-        .card-header h3 {
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
+    .profile-header::after {
+      content: "⚛️";
+      position: absolute;
+      right: 2rem;
+      bottom: 0.5rem;
+      font-size: 4.5rem;
+      opacity: 0.15;
+      pointer-events: none;
+    }
 
-        /* Profile Picture */
-        .avatar-container {
-            text-align: center;
-            margin-top: -50px;
-            margin-bottom: 15px;
-            position: relative;
-        }
+    .avatar {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: #1a3a5c;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      border: 4px solid rgba(255,255,255,0.6);
+      background: #f9fcff;
+    }
 
-        .avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 4px solid #ffffff;
-            object-fit: cover;
-            background-color: #e2e8f0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
+    .title-group h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
 
-        /* Content Body */
-        .card-body {
-            padding: 0 30px 30px;
-            text-align: center;
-        }
+    .title-group .badge {
+      display: inline-block;
+      background: rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(2px);
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: #ffe69b;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      margin-top: 0.3rem;
+    }
 
-        .name {
-            font-size: 1.6rem;
-            color: #1a202c;
-            font-weight: 700;
-        }
+    .title-group .sub-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.6rem;
+      margin-top: 0.6rem;
+      font-weight: 300;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
 
-        .title {
-            font-size: 1rem;
-            color: #3182ce;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
+    .title-group .sub-info i {
+      margin-right: 6px;
+      width: 1.2rem;
+      color: #ffd966;
+    }
 
-        .bio {
-            font-size: 0.95rem;
-            color: #4a5568;
-            margin-bottom: 25px;
-            text-align: justify;
-        }
+    /* body profil */
+    .profile-body {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
 
-        /* Information Grid */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-            text-align: left;
-        }
+    /* grid bio */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem 2rem;
+      background: #f7faff;
+      padding: 1.8rem 1.8rem;
+      border-radius: 2rem;
+      border-left: 6px solid #2b5b84;
+    }
 
-        .info-item {
-            background: #f7fafc;
-            border-left: 4px solid #3182ce;
-            padding: 12px 15px;
-            border-radius: 0 8px 8px 0;
-        }
+    .bio-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.98rem;
+      color: #1e2f44;
+    }
 
-        .info-item .label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: #718096;
-            font-weight: 600;
-            display: block;
-        }
+    .bio-item i {
+      width: 2.2rem;
+      height: 2.2rem;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a3a5c;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+      border: 1px solid #dbe4f0;
+    }
 
-        .info-item .value {
-            font-size: 0.9rem;
-            color: #2d3748;
-            font-weight: 600;
-        }
+    .bio-item span {
+      font-weight: 500;
+    }
 
-        /* Motto Box */
-        .motto-box {
-            background-color: #ebf8ff;
-            border: 1px dashed #63b3ed;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            font-style: italic;
-            color: #2b6cb0;
-            font-size: 0.9rem;
-        }
+    .bio-item .label {
+      font-weight: 400;
+      color: #4a5b72;
+      margin-right: 4px;
+    }
 
-        /* Contact Button */
-        .btn-contact {
-            display: inline-block;
-            background-color: #3182ce;
-            color: #ffffff;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
-        }
+    /* deskripsi */
+    .description {
+      background: #ffffff;
+      padding: 0.5rem 0.2rem;
+    }
 
-        .btn-contact:hover {
-            background-color: #2b6cb0;
-            transform: translateY(-2px);
-        }
+    .description h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a3a5c;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        /* Footer */
-        .card-footer {
-            background-color: #f7fafc;
-            padding: 15px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #a0aec0;
-            border-top: 1px solid #edf2f7;
-        }
-    </style>
+    .description h3 i {
+      color: #2b5b84;
+      font-size: 1.3rem;
+    }
+
+    .description p {
+      line-height: 1.8;
+      color: #1f2e44;
+      font-weight: 400;
+      background: #f9fcff;
+      padding: 1.2rem 1.8rem;
+      border-radius: 1.5rem;
+      border: 1px solid #eaf0f8;
+      font-size: 1rem;
+    }
+
+    /* pendidikan & pengalaman */
+    .edu-exp {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .edu-exp {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+    }
+
+    .edu-box, .exp-box {
+      background: #f7faff;
+      padding: 1.5rem 1.8rem;
+      border-radius: 1.8rem;
+      border: 1px solid #e0ebf7;
+      transition: all 0.2s;
+    }
+
+    .edu-box:hover, .exp-box:hover {
+      background: #f2f8ff;
+      border-color: #b3cee8;
+    }
+
+    .edu-box h4, .exp-box h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a3a5c;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .edu-box h4 i, .exp-box h4 i {
+      color: #2b5b84;
+      font-size: 1.1rem;
+      width: 1.8rem;
+    }
+
+    .edu-box ul, .exp-box ul {
+      list-style: none;
+    }
+
+    .edu-box li, .exp-box li {
+      padding: 0.4rem 0;
+      font-size: 0.95rem;
+      color: #1f344b;
+      border-bottom: 1px dashed #dce5f0;
+      display: flex;
+      gap: 8px;
+    }
+
+    .edu-box li:last-child, .exp-box li:last-child {
+      border-bottom: none;
+    }
+
+    .edu-box li i, .exp-box li i {
+      color: #2b5b84;
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+      width: 1.2rem;
+    }
+
+    /* kutipan / quote */
+    .quote-block {
+      background: linear-gradient(145deg, #eef5fd, #e3ecf7);
+      border-radius: 2rem;
+      padding: 1.8rem 2.2rem;
+      text-align: center;
+      font-style: italic;
+      font-weight: 400;
+      color: #16344d;
+      border-left: 6px solid #2b5b84;
+      box-shadow: inset 0 1px 4px rgba(255,255,255,0.8);
+      margin-top: 0.3rem;
+    }
+
+    .quote-block i {
+      color: #2b5b84;
+      font-size: 1.6rem;
+      opacity: 0.5;
+      margin-right: 8px;
+    }
+
+    .quote-block .author-quote {
+      display: block;
+      margin-top: 0.6rem;
+      font-weight: 600;
+      font-style: normal;
+      color: #1a3a5c;
+    }
+
+    /* footer */
+    .profile-footer {
+      background: #f2f8ff;
+      padding: 1.3rem 2.5rem;
+      border-top: 1px solid #dae6f2;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+      color: #2b4b6b;
+      font-size: 0.9rem;
+    }
+
+    .profile-footer .social {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .profile-footer .social a {
+      color: #1a3a5c;
+      background: white;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: 0.2s;
+      border: 1px solid #c8d9ec;
+    }
+
+    .profile-footer .social a:hover {
+      background: #1a3a5c;
+      color: white;
+      border-color: #1a3a5c;
+      transform: translateY(-2px);
+    }
+
+    .footer-note i {
+      margin-right: 5px;
+      color: #2b5b84;
+    }
+
+    /* responsive tambahan */
+    @media (max-width: 700px) {
+      .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+      .title-group .sub-info {
+        justify-content: center;
+      }
+      .bio-grid {
+        grid-template-columns: 1fr;
+      }
+      .profile-body {
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <div class="profile-card">
-        <!-- Banner Header -->
-        <div class="card-header">
-            <h2>Kartu Profil Pendidik</h2>
-            <h3>SMAN 3 BOGOR</h3>
+  <div class="card">
+    <!-- Header Profil -->
+    <div class="profile-header">
+      <div class="avatar">
+        <i class="fas fa-chalkboard-teacher"></i>
+      </div>
+      <div class="title-group">
+        <h1>Eva Farida, S.Pd, M.Pd</h1>
+        <div class="badge">
+          <i class="fas fa-star" style="margin-right: 6px;"></i> Guru Fisika
         </div>
-
-        <!-- Foto Profil -->
-        <div class="avatar-container">
-            <!-- Ganti URL di bawah dengan foto Anda -->
-            <img src="https://via.placeholder.com/110" alt="Eva Farida, S.Pd., M.Pd." class="avatar">
+        <div class="sub-info">
+          <span><i class="fas fa-school"></i> SMAN 3 Bogor</span>
+          <span><i class="fas fa-map-pin"></i> Kota Bogor, Jawa Barat</span>
+          <span><i class="fas fa-calendar-alt"></i> 12+ Tahun Mengajar</span>
         </div>
-
-        <!-- Biografi & Detail -->
-        <div class="card-body">
-            <h1 class="name">Eva Farida, S.Pd., M.Pd.</h1>
-            <p class="title">Guru Mata Pelajaran Fisika</p>
-
-            <p class="bio">
-                Selamat datang! Saya adalah tenaga pendidik Fisika di SMAN 3 Bogor. Berkomitmen untuk menciptakan pembelajaran Fisika yang interaktif, menyenangkan, dan relevan dengan kehidupan sehari-hari guna membimbing siswa menjadi generasi yang bernalar kritis dan inovatif.
-            </p>
-
-            <!-- Ringkasan Informasi -->
-            <div class="info-grid">
-                <div class="info-item">
-                    <span class="label">Instansi</span>
-                    <span class="value">SMAN 3 Bogor</span>
-                </div>
-                <div class="info-item">
-                    <span class="label">Mata Pelajaran</span>
-                    <span class="value">Fisika</span>
-                </div>
-                <div class="info-item">
-                    <span class="label">Pendidikan Terakhir</span>
-                    <span class="value">Magister Pendidikan (M.Pd.)</span>
-                </div>
-                <div class="info-item">
-                    <span class="label">Bidang Minat</span>
-                    <span class="value">Pembelajaran Fisika & Sains</span>
-                </div>
-            </div>
-
-            <!-- Pesan / Moto -->
-            <div class="motto-box">
-                "Fisika bukan hanya tentang rumus, melainkan tentang cara kita memahami alam semesta dan bagaimana dunia bekerja."
-            </div>
-
-            <!-- Tombol Kontak -->
-            <a href="mailto:evafarida@email.com" class="btn-contact">Hubungi via Email</a>
-        </div>
-
-        <!-- Footer -->
-        <div class="card-footer">
-            &copy; SMAN 3 Bogor — Portofolio Pendidik
-        </div>
+      </div>
     </div>
 
+    <!-- Body -->
+    <div class="profile-body">
+      <!-- Grid info singkat -->
+      <div class="bio-grid">
+        <div class="bio-item">
+          <i class="fas fa-user-graduate"></i>
+          <span><span class="label">NIP:</span> 19850708 202501 2 015</span>
+        </div>
+        <div class="bio-item">
+          <i class="fas fa-book-open"></i>
+          <span><span class="label">Bidang:</span> Fisika & Ilmu Pengetahuan</span>
+        </div>
+        <div class="bio-item">
+          <i class="fas fa-certificate"></i>
+          <span><span class="label">Sertifikasi:</span> Pendidik Profesional</span>
+        </div>
+        <div class="bio-item">
+          <i class="fas fa-flag"></i>
+          <span><span class="label">Status:</span> PNS / Aktif</span>
+        </div>
+      </div>
+
+      <!-- Deskripsi -->
+      <div class="description">
+        <h3><i class="fas fa-pen-fancy"></i> Tentang Saya</h3>
+        <p>
+          Saya adalah pengajar Fisika yang berdedikasi di SMAN 3 Bogor dengan pengalaman lebih dari satu dekade. 
+          Berkomitmen menghadirkan pembelajaran yang interaktif, berbasis eksperimen, dan menumbuhkan rasa ingin tahu 
+          siswa terhadap fenomena alam. Lulusan S2 Pendidikan Fisika dengan fokus pada inovasi kurikulum dan 
+          pengembangan media ajar digital.
+        </p>
+      </div>
+
+      <!-- Pendidikan & Pengalaman -->
+      <div class="edu-exp">
+        <div class="edu-box">
+          <h4><i class="fas fa-university"></i> Pendidikan</h4>
+          <ul>
+            <li><i class="fas fa-graduation-cap"></i> S2 Pendidikan Fisika – UNESA (2014)</li>
+            <li><i class="fas fa-graduation-cap"></i> S1 Pendidikan Fisika – UPI Bandung (2007)</li>
+            <li><i class="fas fa-certificate"></i> Pelatihan & Workshop: STEM, Lab Virtual, dan Asesmen Kompetensi</li>
+          </ul>
+        </div>
+        <div class="exp-box">
+          <h4><i class="fas fa-briefcase"></i> Pengalaman</h4>
+          <ul>
+            <li><i class="fas fa-chalkboard"></i> Guru Fisika SMAN 3 Bogor (2012 – sekarang)</li>
+            <li><i class="fas fa-chalkboard"></i> Guru Fisika SMAN 1 Cibinong (2007 – 2012)</li>
+            <li><i class="fas fa-users"></i> Fasilitator Olimpiade Fisika & KIR</li>
+            <li><i class="fas fa-laptop"></i> Pengembang Modul Ajar & E-learning</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Quote / moto -->
+      <div class="quote-block">
+        <i class="fas fa-quote-left"></i> 
+        “Fisika bukan sekadar rumus, tetapi cara berpikir untuk memahami alam semesta. 
+        Setiap murid memiliki potensi untuk menjadi ilmuwan.” 
+        <span class="author-quote">— Eva Farida, S.Pd, M.Pd</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="profile-footer">
+      <div class="footer-note">
+        <i class="fas fa-envelope"></i> eva.farida@smantigabogor.sch.id
+        <span style="margin: 0 12px;">|</span>
+        <i class="fas fa-phone-alt"></i> +62 812 3456 7890
+      </div>
+      <div class="social">
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
