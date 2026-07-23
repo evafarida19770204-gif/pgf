@@ -26,7 +26,7 @@
     }
 
     .card {
-      max-width: 1000px;
+      max-width: 1100px;
       width: 100%;
       background-color: #ffffff;
       border-radius: 2.5rem;
@@ -37,24 +37,24 @@
     }
 
     .card:hover {
-      transform: scale(1.01);
+      transform: scale(1.005);
     }
 
-    /* === LIVE STREAMING === */
-    .live-stream-wrapper {
+    /* ===== VIDEO STREAMING SIDE BY SIDE ===== */
+    .video-section {
       background: #0b1a2b;
-      padding: 0.8rem 0.8rem 0.5rem 0.8rem;
+      padding: 1rem 1rem 0.8rem 1rem;
       border-bottom: 3px solid #ffd966;
       position: relative;
     }
 
-    .live-stream-wrapper .live-badge {
+    .video-section .live-badge {
       position: absolute;
-      top: 1.2rem;
-      left: 1.8rem;
+      top: 1.6rem;
+      left: 2rem;
       background: #e74c3c;
       color: white;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 1px;
       padding: 0.25rem 1rem;
@@ -63,44 +63,89 @@
       align-items: center;
       gap: 6px;
       box-shadow: 0 0 20px rgba(231, 76, 60, 0.4);
-      z-index: 2;
+      z-index: 5;
       border: 1px solid rgba(255,255,255,0.15);
     }
 
-    .live-stream-wrapper .live-badge i {
-      font-size: 0.6rem;
+    .video-section .live-badge i {
+      font-size: 0.55rem;
       animation: blink 1.2s infinite;
     }
 
     @keyframes blink {
-      0% { opacity: 1; }
+      0%, 100% { opacity: 1; }
       50% { opacity: 0.2; }
-      100% { opacity: 1; }
     }
 
-    .live-stream-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 45%;
-      height: 0;
-      overflow: hidden;
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
       border-radius: 1.2rem;
-      background: #000;
-      box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+      overflow: hidden;
     }
 
-    .live-stream-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .video-item {
+      position: relative;
+      background: #000;
+      border-radius: 1rem;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      min-height: 200px;
+    }
+
+    .video-item video,
+    .video-item iframe {
       width: 100%;
       height: 100%;
+      object-fit: cover;
       border: 0;
       background: #111;
+      display: block;
     }
 
-    /* pesan error / fallback untuk mixed content */
-    .mixed-content-fallback {
+    .video-item .video-label {
+      position: absolute;
+      bottom: 0.8rem;
+      left: 0.8rem;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .video-item .video-label i {
+      font-size: 0.6rem;
+      color: #4ecdc4;
+    }
+
+    .video-item .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+
+    .status-dot.online {
+      background: #4ecdc4;
+      box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+    }
+
+    .status-dot.offline {
+      background: #e74c3c;
+      box-shadow: 0 0 10px rgba(231, 76, 60, 0.4);
+    }
+
+    .video-item .fallback-msg {
       position: absolute;
       top: 0;
       left: 0;
@@ -110,60 +155,58 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(145deg, #1a2a3a, #0d1b2a);
+      background: rgba(0,0,0,0.85);
       color: #aac4e0;
       text-align: center;
-      padding: 2rem;
-      border-radius: 1.2rem;
+      padding: 1.5rem;
+      z-index: 2;
     }
 
-    .mixed-content-fallback i {
-      font-size: 3.5rem;
+    .video-item .fallback-msg i {
+      font-size: 2.5rem;
       color: #ffd966;
-      margin-bottom: 1rem;
-      opacity: 0.8;
+      margin-bottom: 0.6rem;
+      opacity: 0.7;
     }
 
-    .mixed-content-fallback h3 {
+    .video-item .fallback-msg h4 {
       color: #fff;
-      font-weight: 600;
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
     }
 
-    .mixed-content-fallback p {
-      font-size: 0.9rem;
-      opacity: 0.8;
-      max-width: 400px;
-      line-height: 1.6;
+    .video-item .fallback-msg p {
+      font-size: 0.8rem;
+      opacity: 0.6;
+      max-width: 250px;
+      line-height: 1.5;
     }
 
-    .mixed-content-fallback .btn-stream {
-      margin-top: 1.2rem;
+    .video-item .fallback-msg .btn-link {
+      margin-top: 0.8rem;
       background: #ffd966;
       color: #1a2a3a;
-      padding: 0.6rem 2rem;
-      border-radius: 40px;
+      padding: 0.4rem 1.5rem;
+      border-radius: 30px;
       font-weight: 600;
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       transition: 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      border: none;
-      cursor: pointer;
+      gap: 6px;
     }
 
-    .mixed-content-fallback .btn-stream:hover {
+    .video-item .fallback-msg .btn-link:hover {
       background: #ffe08a;
       transform: scale(1.03);
     }
 
-    /* header / cover */
+    /* ===== HEADER PROFIL ===== */
     .profile-header {
       background: linear-gradient(135deg, #1a3a5c 0%, #2b5b84 100%);
-      padding: 2.5rem 2.5rem 1.8rem 2.5rem;
+      padding: 2rem 2.5rem 1.5rem 2.5rem;
       color: white;
       display: flex;
       flex-wrap: wrap;
@@ -178,20 +221,20 @@
       right: 2rem;
       bottom: 0.5rem;
       font-size: 4.5rem;
-      opacity: 0.15;
+      opacity: 0.12;
       pointer-events: none;
     }
 
     .avatar {
       flex-shrink: 0;
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       background: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4rem;
+      font-size: 3.8rem;
       color: #1a3a5c;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       border: 4px solid rgba(255,255,255,0.6);
@@ -199,7 +242,7 @@
     }
 
     .title-group h1 {
-      font-size: 2.1rem;
+      font-size: 2rem;
       font-weight: 700;
       letter-spacing: -0.5px;
       line-height: 1.2;
@@ -209,11 +252,10 @@
       display: inline-block;
       background: rgba(255, 215, 0, 0.2);
       backdrop-filter: blur(2px);
-      padding: 0.3rem 1.2rem;
+      padding: 0.25rem 1.2rem;
       border-radius: 40px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      letter-spacing: 0.3px;
       color: #ffe69b;
       border: 1px solid rgba(255, 215, 0, 0.3);
       margin-top: 0.3rem;
@@ -222,34 +264,34 @@
     .title-group .sub-info {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem 1.6rem;
-      margin-top: 0.6rem;
+      gap: 0.6rem 1.4rem;
+      margin-top: 0.5rem;
       font-weight: 300;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       opacity: 0.9;
     }
 
     .title-group .sub-info i {
-      margin-right: 6px;
-      width: 1.2rem;
+      margin-right: 5px;
+      width: 1.1rem;
       color: #ffd966;
     }
 
-    /* body profil */
+    /* ===== BODY PROFIL ===== */
     .profile-body {
-      padding: 2.5rem;
+      padding: 2rem 2.5rem 1.8rem;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1.8rem;
     }
 
-    /* grid bio */
+    /* BIO GRID */
     .bio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.2rem 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1rem 1.8rem;
       background: #f7faff;
-      padding: 1.8rem 1.8rem;
+      padding: 1.5rem 1.8rem;
       border-radius: 2rem;
       border-left: 6px solid #2b5b84;
     }
@@ -257,46 +299,38 @@
     .bio-item {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      font-size: 0.98rem;
+      gap: 0.7rem;
+      font-size: 0.93rem;
       color: #1e2f44;
     }
 
     .bio-item i {
-      width: 2.2rem;
-      height: 2.2rem;
+      width: 2rem;
+      height: 2rem;
       background: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #1a3a5c;
-      font-size: 1.1rem;
+      font-size: 1rem;
       box-shadow: 0 4px 8px rgba(0,0,0,0.03);
       border: 1px solid #dbe4f0;
-    }
-
-    .bio-item span {
-      font-weight: 500;
+      flex-shrink: 0;
     }
 
     .bio-item .label {
       font-weight: 400;
       color: #4a5b72;
-      margin-right: 4px;
+      margin-right: 3px;
     }
 
-    /* deskripsi */
-    .description {
-      background: #ffffff;
-      padding: 0.5rem 0.2rem;
-    }
-
+    /* DESKRIPSI */
     .description h3 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: #1a3a5c;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -304,40 +338,38 @@
 
     .description h3 i {
       color: #2b5b84;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
 
     .description p {
       line-height: 1.8;
       color: #1f2e44;
-      font-weight: 400;
       background: #f9fcff;
-      padding: 1.2rem 1.8rem;
+      padding: 1rem 1.6rem;
       border-radius: 1.5rem;
       border: 1px solid #eaf0f8;
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
-    /* pendidikan & pengalaman */
+    /* PENDIDIKAN & PENGALAMAN */
     .edu-exp {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      gap: 1.2rem;
     }
 
     @media (max-width: 600px) {
       .edu-exp {
         grid-template-columns: 1fr;
-        gap: 1.2rem;
       }
     }
 
     .edu-box, .exp-box {
       background: #f7faff;
-      padding: 1.5rem 1.8rem;
+      padding: 1.2rem 1.6rem;
       border-radius: 1.8rem;
       border: 1px solid #e0ebf7;
-      transition: all 0.2s;
+      transition: 0.2s;
     }
 
     .edu-box:hover, .exp-box:hover {
@@ -346,10 +378,10 @@
     }
 
     .edu-box h4, .exp-box h4 {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: #1a3a5c;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -357,8 +389,8 @@
 
     .edu-box h4 i, .exp-box h4 i {
       color: #2b5b84;
-      font-size: 1.1rem;
-      width: 1.8rem;
+      font-size: 1rem;
+      width: 1.6rem;
     }
 
     .edu-box ul, .exp-box ul {
@@ -366,8 +398,8 @@
     }
 
     .edu-box li, .exp-box li {
-      padding: 0.4rem 0;
-      font-size: 0.95rem;
+      padding: 0.3rem 0;
+      font-size: 0.9rem;
       color: #1f344b;
       border-bottom: 1px dashed #dce5f0;
       display: flex;
@@ -380,64 +412,63 @@
 
     .edu-box li i, .exp-box li i {
       color: #2b5b84;
-      font-size: 0.8rem;
-      margin-top: 0.3rem;
-      width: 1.2rem;
+      font-size: 0.7rem;
+      margin-top: 0.25rem;
+      width: 1rem;
     }
 
-    /* kutipan / quote */
+    /* QUOTE */
     .quote-block {
       background: linear-gradient(145deg, #eef5fd, #e3ecf7);
       border-radius: 2rem;
-      padding: 1.8rem 2.2rem;
+      padding: 1.5rem 2rem;
       text-align: center;
       font-style: italic;
       font-weight: 400;
       color: #16344d;
       border-left: 6px solid #2b5b84;
       box-shadow: inset 0 1px 4px rgba(255,255,255,0.8);
-      margin-top: 0.3rem;
     }
 
     .quote-block i {
       color: #2b5b84;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       opacity: 0.5;
-      margin-right: 8px;
+      margin-right: 6px;
     }
 
     .quote-block .author-quote {
       display: block;
-      margin-top: 0.6rem;
+      margin-top: 0.4rem;
       font-weight: 600;
       font-style: normal;
       color: #1a3a5c;
     }
 
-    /* footer */
+    /* ===== FOOTER ===== */
     .profile-footer {
       background: #f2f8ff;
-      padding: 1.3rem 2.5rem;
+      padding: 1rem 2.5rem;
       border-top: 1px solid #dae6f2;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 0.8rem;
+      gap: 0.6rem;
       align-items: center;
       color: #2b4b6b;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .profile-footer .social {
       display: flex;
-      gap: 1.2rem;
+      gap: 0.8rem;
     }
 
     .profile-footer .social a {
       color: #1a3a5c;
       background: white;
-      width: 38px;
-      height: 38px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
@@ -459,63 +490,116 @@
       color: #2b5b84;
     }
 
-    /* responsive tambahan */
-    @media (max-width: 700px) {
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+      }
+      .video-item {
+        aspect-ratio: 16 / 9;
+        min-height: 180px;
+      }
       .profile-header {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 2rem 1.5rem;
+        padding: 1.8rem 1.2rem;
       }
       .title-group .sub-info {
         justify-content: center;
       }
       .bio-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        padding: 1.2rem;
       }
       .profile-body {
-        padding: 1.5rem;
+        padding: 1.2rem;
       }
-      .live-stream-container {
-        padding-bottom: 56.25%;
+      .profile-footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem 1.2rem;
+      }
+      .video-section .live-badge {
+        left: 1.2rem;
+        top: 1.2rem;
+        font-size: 0.6rem;
+        padding: 0.15rem 0.8rem;
+      }
+      .avatar {
+        width: 90px;
+        height: 90px;
+        font-size: 3rem;
+      }
+      .title-group h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .bio-grid {
+        grid-template-columns: 1fr;
+      }
+      .video-item .fallback-msg p {
+        font-size: 0.7rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <!-- ===== LIVE STREAMING ===== -->
-    <div class="live-stream-wrapper">
+
+    <!-- ===== VIDEO SECTION: SIDE BY SIDE ===== -->
+    <div class="video-section">
       <div class="live-badge">
         <i class="fas fa-circle"></i> LIVE
       </div>
-      <div class="live-stream-container" id="liveContainer">
-        <!-- Fallback untuk mixed content (ditampilkan via JS jika iframe gagal) -->
-        <div class="mixed-content-fallback" id="fallbackContent">
-          <i class="fas fa-video"></i>
-          <h3>Live Streaming Tidak Tersedia</h3>
-          <p>
-            Konten live streaming dari <strong>http://10.101.209.100/</strong> tidak dapat ditampilkan karena 
-            perbedaan protokol keamanan (Mixed Content).
-          </p>
-          <a href="http://10.101.209.100/" target="_blank" class="btn-stream">
-            <i class="fas fa-external-link-alt"></i> Buka di Tab Baru
-          </a>
+
+      <div class="video-grid">
+        <!-- Video 1: Kamera Laptop (Webcam) -->
+        <div class="video-item">
+          <video id="webcamVideo" autoplay playsinline muted></video>
+          <div class="video-label">
+            <span class="status-dot online"></span>
+            <i class="fas fa-camera"></i> Kamera Laptop
+          </div>
+          <!-- fallback jika webcam tidak tersedia -->
+          <div class="fallback-msg" id="webcamFallback" style="display:none;">
+            <i class="fas fa-camera-slash"></i>
+            <h4>Kamera Tidak Tersedia</h4>
+            <p>Pastikan Anda telah mengizinkan akses kamera.</p>
+          </div>
         </div>
-        <!-- iframe disembunyikan, akan ditampilkan jika berhasil -->
-        <iframe 
-          id="liveIframe"
-          src="http://10.101.209.100/" 
-          allow="autoplay; fullscreen" 
-          allowfullscreen
-          loading="lazy"
-          title="Live Streaming SMAN 3 Bogor"
-          style="display:none;"
-        ></iframe>
+
+        <!-- Video 2: Stream IP (http://10.101.209.100/) -->
+        <div class="video-item">
+          <iframe 
+            id="ipStreamIframe"
+            src="http://10.101.209.100/" 
+            allow="autoplay; fullscreen" 
+            allowfullscreen
+            loading="lazy"
+            title="Live Streaming IP Camera"
+          ></iframe>
+          <div class="video-label">
+            <span class="status-dot online" id="ipStatusDot"></span>
+            <i class="fas fa-network-wired"></i> Stream IP
+          </div>
+          <!-- fallback untuk mixed content / error -->
+          <div class="fallback-msg" id="ipFallback" style="display:none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h4>Stream IP Tidak Tersedia</h4>
+            <p>Koneksi ke <strong>http://10.101.209.100/</strong> gagal.</p>
+            <a href="http://10.101.209.100/" target="_blank" class="btn-link">
+              <i class="fas fa-external-link-alt"></i> Buka di Tab Baru
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Header Profil -->
+    <!-- ===== HEADER PROFIL ===== -->
     <div class="profile-header">
       <div class="avatar">
         <i class="fas fa-chalkboard-teacher"></i>
@@ -534,9 +618,10 @@
       </div>
     </div>
 
-    <!-- Body -->
+    <!-- ===== BODY PROFIL ===== -->
     <div class="profile-body">
-      <!-- Grid info singkat sesuai data pegawai -->
+
+      <!-- BIO GRID -->
       <div class="bio-grid">
         <div class="bio-item">
           <i class="fas fa-id-badge"></i>
@@ -552,7 +637,7 @@
         </div>
         <div class="bio-item">
           <i class="fas fa-certificate"></i>
-          <span><span class="label">Sertifikasi:</span> Guru Penggerak & Pendidik</span>
+          <span><span class="label">Sertifikasi:</span> Guru Penggerak &amp; Pendidik</span>
         </div>
         <div class="bio-item">
           <i class="fas fa-flag"></i>
@@ -562,9 +647,17 @@
           <i class="fas fa-trophy"></i>
           <span><span class="label">Penghargaan:</span> Satyalancana Karya Satya XX Tahun</span>
         </div>
+        <div class="bio-item">
+          <i class="fas fa-calendar-check"></i>
+          <span><span class="label">TMT Gaji Terbaru:</span> 1 Desember 2024</span>
+        </div>
+        <div class="bio-item">
+          <i class="fas fa-home"></i>
+          <span><span class="label">Alamat:</span> Perum. de Botanica Blok G 19, Cimahpar</span>
+        </div>
       </div>
 
-      <!-- Deskripsi -->
+      <!-- DESKRIPSI -->
       <div class="description">
         <h3><i class="fas fa-pen-fancy"></i> Tentang Saya</h3>
         <p>
@@ -576,12 +669,12 @@
         </p>
       </div>
 
-      <!-- Pendidikan & Pengalaman (diambil dari riwayat pendidikan formal & jabatan) -->
+      <!-- PENDIDIKAN & PENGALAMAN -->
       <div class="edu-exp">
         <div class="edu-box">
           <h4><i class="fas fa-university"></i> Pendidikan Formal</h4>
           <ul>
-            <li><i class="fas fa-graduation-cap"></i> S2 Penelitian & Evaluasi Pendidikan – UNJ (2012)</li>
+            <li><i class="fas fa-graduation-cap"></i> S2 Penelitian &amp; Evaluasi Pendidikan – UNJ (2012)</li>
             <li><i class="fas fa-graduation-cap"></i> S1 Pendidikan Fisika – UNJ (2002)</li>
             <li><i class="fas fa-school"></i> SMA Negeri 3 Bogor (1995)</li>
             <li><i class="fas fa-school"></i> SMP Negeri 1 Cibinong (1992)</li>
@@ -599,7 +692,7 @@
         </div>
       </div>
 
-      <!-- Quote / moto -->
+      <!-- QUOTE -->
       <div class="quote-block">
         <i class="fas fa-quote-left"></i> 
         “Fisika bukan sekadar rumus, tetapi cara berpikir untuk memahami alam semesta. 
@@ -608,70 +701,93 @@
       </div>
     </div>
 
-    <!-- Footer dengan data kontak dari CV -->
+    <!-- ===== FOOTER ===== -->
     <div class="profile-footer">
       <div class="footer-note">
         <i class="fas fa-envelope"></i> eva_farida@smantiboo.sch.id
-        <span style="margin: 0 12px;">|</span>
+        <span style="margin: 0 10px;">|</span>
         <i class="fas fa-phone-alt"></i> +62 813 1674 4169
-        <span style="margin: 0 12px;">|</span>
-        <i class="fas fa-home"></i> Perum. de Botanica Blok G 19, Cimahpar
+        <span style="margin: 0 10px;">|</span>
+        <i class="fas fa-home"></i> Perum. de Botanica Blok G 19
       </div>
       <div class="social">
         <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
         <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
+
   </div>
 
   <script>
-    // Deteksi Mixed Content: coba muat iframe, jika gagal tampilkan fallback
-    document.addEventListener('DOMContentLoaded', function() {
-      const iframe = document.getElementById('liveIframe');
-      const fallback = document.getElementById('fallbackContent');
-      const container = document.getElementById('liveContainer');
+    // ===== 1. AKSES WEBCAM =====
+    const webcamVideo = document.getElementById('webcamVideo');
+    const webcamFallback = document.getElementById('webcamFallback');
 
-      // Cek apakah halaman diakses melalui HTTPS
-      if (window.location.protocol === 'https:') {
-        // Jika HTTPS, browser akan memblokir HTTP iframe
-        // Tampilkan fallback, sembunyikan iframe
-        iframe.style.display = 'none';
-        fallback.style.display = 'flex';
-      } else {
-        // Jika HTTP (atau lokal), coba tampilkan iframe
-        iframe.style.display = 'block';
-        fallback.style.display = 'none';
-        // Set src ulang untuk memicu loading
-        iframe.src = 'http://10.101.209.100/';
-      }
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        .then(function(stream) {
+          webcamVideo.srcObject = stream;
+          webcamVideo.style.display = 'block';
+          webcamFallback.style.display = 'none';
+        })
+        .catch(function(err) {
+          console.warn('Webcam error:', err);
+          webcamVideo.style.display = 'none';
+          webcamFallback.style.display = 'flex';
+        });
+    } else {
+      webcamVideo.style.display = 'none';
+      webcamFallback.style.display = 'flex';
+    }
 
-      // Event listener untuk error pada iframe (jika gagal dimuat)
-      iframe.addEventListener('error', function() {
-        iframe.style.display = 'none';
-        fallback.style.display = 'flex';
-      });
+    // ===== 2. STREAM IP - Deteksi Mixed Content =====
+    const ipIframe = document.getElementById('ipStreamIframe');
+    const ipFallback = document.getElementById('ipFallback');
+    const ipStatusDot = document.getElementById('ipStatusDot');
 
-      // Timeout: jika iframe tidak merespon dalam 8 detik, tampilkan fallback
-      let loadTimeout = setTimeout(function() {
-        if (iframe.style.display !== 'none') {
-          // Cek apakah iframe benar-benar termuat
-          try {
-            // Jika akses ke konten iframe ditolak (cross-origin), berarti termuat
-            // Tapi kita tidak bisa mendeteksi dengan pasti, jadi biarkan saja
-          } catch(e) {
-            // Jika error, mungkin belum termuat
-          }
-          // Tetap tampilkan fallback setelah timeout untuk pengalaman lebih baik
-          // Tapi hanya jika kita di HTTPS
+    function handleIPStreamError() {
+      ipIframe.style.display = 'none';
+      ipFallback.style.display = 'flex';
+      ipStatusDot.className = 'status-dot offline';
+    }
+
+    // Jika halaman diakses via HTTPS, browser akan memblokir HTTP iframe
+    if (window.location.protocol === 'https:') {
+      // Tampilkan fallback karena mixed content
+      handleIPStreamError();
+    } else {
+      // Jika HTTP, coba muat iframe
+      ipIframe.style.display = 'block';
+      ipFallback.style.display = 'none';
+      ipStatusDot.className = 'status-dot online';
+      
+      // Set src ulang untuk memicu loading
+      ipIframe.src = 'http://10.101.209.100/';
+      
+      // Timeout: jika iframe tidak merespon dalam 10 detik, anggap gagal
+      setTimeout(function() {
+        // Cek apakah iframe masih ditampilkan
+        if (ipIframe.style.display !== 'none') {
+          // Kita tidak bisa mendeteksi secara pasti, tapi jika masih di HTTPS tampilkan fallback
           if (window.location.protocol === 'https:') {
-            iframe.style.display = 'none';
-            fallback.style.display = 'flex';
+            handleIPStreamError();
           }
         }
-      }, 8000);
+      }, 10000);
+    }
+
+    // Event listener error pada iframe
+    ipIframe.addEventListener('error', function() {
+      handleIPStreamError();
     });
+
+    // ===== 3. FITUR TAMBAHAN: Tombol kontrol (opsional) =====
+    console.log('✅ Profil Eva Farida siap!');
+    console.log('📹 Webcam: ' + (webcamVideo.srcObject ? 'Aktif' : 'Tidak tersedia'));
+    console.log('📡 Stream IP: ' + (ipIframe.style.display !== 'none' ? 'Dimuat' : 'Fallback'));
   </script>
 </body>
 </html>
