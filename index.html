@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perkenalan - Eva Farida</title>
+    <title>Profil Guru - Eva Farida, S.Pd., M.Pd.</title>
     <style>
-        /* Gaya Dasar & Reset */
+        /* Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: #f0f4f8;
+            color: #2d3748;
             line-height: 1.6;
             display: flex;
             justify-content: center;
@@ -24,140 +24,210 @@
             padding: 20px;
         }
 
-        /* Kartu Profil */
-        .card {
+        /* Container Card */
+        .profile-card {
             background: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
             width: 100%;
             overflow: hidden;
-            text-align: center;
         }
 
-        /* Header / Banner */
+        /* Header / Banner Bertema Sains/Fisika */
         .card-header {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            height: 120px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 40px 20px 60px;
+            text-align: center;
+            color: #ffffff;
+            position: relative;
         }
 
-        /* Foto Profil */
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid #ffffff;
-            margin-top: -60px;
-            object-fit: cover;
-            background-color: #ddd;
-        }
-
-        /* Konten */
-        .card-body {
-            padding: 25px;
-        }
-
-        .card-body h1 {
-            font-size: 1.8rem;
-            color: #2c3e50;
+        .card-header h2 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #cbd5e0;
             margin-bottom: 5px;
         }
 
-        .card-body h3 {
+        .card-header h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Profile Picture */
+        .avatar-container {
+            text-align: center;
+            margin-top: -50px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            object-fit: cover;
+            background-color: #e2e8f0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Content Body */
+        .card-body {
+            padding: 0 30px 30px;
+            text-align: center;
+        }
+
+        .name {
+            font-size: 1.6rem;
+            color: #1a202c;
+            font-weight: 700;
+        }
+
+        .title {
             font-size: 1rem;
-            color: #7f8c8d;
-            font-weight: 400;
+            color: #3182ce;
+            font-weight: 600;
             margin-bottom: 20px;
         }
 
-        .about-text {
+        .bio {
             font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 20px;
+            color: #4a5568;
+            margin-bottom: 25px;
             text-align: justify;
         }
 
-        /* Bagian Detail/Keahlian */
-        .details {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
+        /* Information Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
             text-align: left;
         }
 
-        .details h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 5px;
+        .info-item {
+            background: #f7fafc;
+            border-left: 4px solid #3182ce;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
         }
 
-        .details ul {
-            list-style: none;
+        .info-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #718096;
+            font-weight: 600;
+            display: block;
         }
 
-        .details ul li {
+        .info-item .value {
             font-size: 0.9rem;
-            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 600;
         }
 
-        .details ul li strong {
-            color: #4a5568;
+        /* Motto Box */
+        .motto-box {
+            background-color: #ebf8ff;
+            border: 1px dashed #63b3ed;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #2b6cb0;
+            font-size: 0.9rem;
         }
 
-        /* Tombol Kontak / Sosial Media */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn {
+        /* Contact Button */
+        .btn-contact {
             display: inline-block;
-            padding: 10px 20px;
+            background-color: #3182ce;
+            color: #ffffff;
+            padding: 12px 30px;
             border-radius: 25px;
             text-decoration: none;
-            color: #fff;
-            background: #6e8efb;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transition: background 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
         }
 
-        .btn:hover {
-            background: #5a7be0;
+        .btn-contact:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .card-footer {
+            background-color: #f7fafc;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #a0aec0;
+            border-top: 1px solid #edf2f7;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="card-header"></div>
-        
-        <!-- Ganti src dengan link foto Anda jika ada -->
-        <img src="https://via.placeholder.com/120" alt="Foto Eva Farida" class="profile-img">
-        
-        <div class="card-body">
-            <h1>Eva Farida</h1>
-            <h3>Profesional / Pelajar / Pekerja Kreatif</h3>
+    <div class="profile-card">
+        <!-- Banner Header -->
+        <div class="card-header">
+            <h2>Kartu Profil Pendidik</h2>
+            <h3>SMAN 3 BOGOR</h3>
+        </div>
 
-            <p class="about-text">
-                Halo! Saya <strong>Eva Farida</strong>. Saya seseorang yang antusias dalam belajar hal-hal baru, senang bekerja sama dalam tim, dan selalu berusaha memberikan yang terbaik dalam setiap hal yang saya kerjakan.
+        <!-- Foto Profil -->
+        <div class="avatar-container">
+            <!-- Ganti URL di bawah dengan foto Anda -->
+            <img src="https://via.placeholder.com/110" alt="Eva Farida, S.Pd., M.Pd." class="avatar">
+        </div>
+
+        <!-- Biografi & Detail -->
+        <div class="card-body">
+            <h1 class="name">Eva Farida, S.Pd., M.Pd.</h1>
+            <p class="title">Guru Mata Pelajaran Fisika</p>
+
+            <p class="bio">
+                Selamat datang! Saya adalah tenaga pendidik Fisika di SMAN 3 Bogor. Berkomitmen untuk menciptakan pembelajaran Fisika yang interaktif, menyenangkan, dan relevan dengan kehidupan sehari-hari guna membimbing siswa menjadi generasi yang bernalar kritis dan inovatif.
             </p>
 
-            <div class="details">
-                <h4>Informasi Singkat</h4>
-                <ul>
-                    <li><strong>Lokasi:</strong> Indonesia</li>
-                    <li><strong>Minat:</strong> Desain, Menulis, & Teknologi</li>
-                    <li><strong>Email:</strong> evafarida@email.com</li>
-                </ul>
+            <!-- Ringkasan Informasi -->
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">Instansi</span>
+                    <span class="value">SMAN 3 Bogor</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Mata Pelajaran</span>
+                    <span class="value">Fisika</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Pendidikan Terakhir</span>
+                    <span class="value">Magister Pendidikan (M.Pd.)</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Bidang Minat</span>
+                    <span class="value">Pembelajaran Fisika & Sains</span>
+                </div>
             </div>
 
-            <div class="social-links">
-                <a href="mailto:evafarida@email.com" class="btn">Hubungi Saya</a>
+            <!-- Pesan / Moto -->
+            <div class="motto-box">
+                "Fisika bukan hanya tentang rumus, melainkan tentang cara kita memahami alam semesta dan bagaimana dunia bekerja."
             </div>
+
+            <!-- Tombol Kontak -->
+            <a href="mailto:evafarida@email.com" class="btn-contact">Hubungi via Email</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer">
+            &copy; SMAN 3 Bogor — Portofolio Pendidik
         </div>
     </div>
 
